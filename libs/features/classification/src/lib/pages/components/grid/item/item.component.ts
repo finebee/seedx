@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import * as fs from '../../../../+state';
+import { ClassificationEntity } from '../../../../dp';
 
 @Component({
   selector: 'seedx-item',
@@ -8,5 +8,5 @@ import * as fs from '../../../../+state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
-  @Input() data: fs.Entity;
+  @Input() data: ClassificationEntity;
 }
