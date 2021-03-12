@@ -1,9 +1,9 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
   },
-  "defaultProject": "green",
   "schematics": {
     "@nrwl/angular": {
       "application": {
@@ -20,7 +20,8 @@
       "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      "e2eTestRunner": "cypress",
+      "strict": true
     },
     "@nrwl/angular:library": {
       "style": "scss",
@@ -32,31 +33,42 @@
     }
   },
   "projects": {
-    "green": {
+    "green-client": {
       "projectType": "application",
-      "root": "apps/green",
-      "sourceRoot": "apps/green/src",
+      "root": "apps/green/client",
+      "sourceRoot": "apps/green/client/src",
       "prefix": "seedx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/green",
-            "index": "apps/green/src/index.html",
-            "main": "apps/green/src/main.ts",
-            "polyfills": "apps/green/src/polyfills.ts",
-            "tsConfig": "apps/green/tsconfig.app.json",
+            "outputPath": "dist/apps/green/client",
+            "index": "apps/green/client/src/index.html",
+            "main": "apps/green/client/src/main.ts",
+            "polyfills": "apps/green/client/src/polyfills.ts",
+            "tsConfig": "apps/green/client/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/green/src/favicon.ico", "apps/green/src/assets"],
-            "styles": ["apps/green/src/styles.scss"],
+            "assets": [
+              {
+                "input": "libs/assets/src",
+                "glob": "favicon.ico",
+                "output": "./"
+              },
+              {
+                "input": "libs/assets/src/assets",
+                "glob": "**/*",
+                "output": "assets"
+              }
+            ],
+            "styles": ["libs/assets/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/green/src/environments/environment.ts",
-                  "with": "apps/green/src/environments/environment.prod.ts"
+                  "replace": "libs/assets/src/environments/environment.ts",
+                  "with": "libs/assets/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -84,64 +96,193 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "green:build"
+            "browserTarget": "green-client:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "green:build:production"
+              "browserTarget": "green-client:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "green:build"
+            "browserTarget": "green-client:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "apps/green/src/**/*.ts",
-              "apps/green/src/**/*.html"
+              "apps/green/client/src/**/*.ts",
+              "apps/green/client/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/green"],
+          "outputs": ["coverage/apps/green/client"],
           "options": {
-            "jestConfig": "apps/green/jest.config.js",
+            "jestConfig": "apps/green/client/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
-    "green-e2e": {
-      "root": "apps/green-e2e",
-      "sourceRoot": "apps/green-e2e/src",
+    "green-client-e2e": {
+      "root": "apps/green/client-e2e",
+      "sourceRoot": "apps/green/client-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/green-e2e/cypress.json",
-            "tsConfig": "apps/green-e2e/tsconfig.e2e.json",
-            "devServerTarget": "green:serve"
+            "cypressConfig": "apps/green/client-e2e/cypress.json",
+            "tsConfig": "apps/green/client-e2e/tsconfig.e2e.json",
+            "devServerTarget": "green-client:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "green:serve:production"
+              "devServerTarget": "green-client:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/green-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/green/client-e2e/**/*.{js,ts}"]
           }
         }
       }
+    },
+    "assets": {
+      "projectType": "library",
+      "root": "libs/assets",
+      "sourceRoot": "libs/assets/src",
+      "prefix": "seedx",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/assets/src/**/*.ts",
+              "libs/assets/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/assets"],
+          "options": {
+            "jestConfig": "libs/assets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "features-classification": {
+      "projectType": "library",
+      "root": "libs/features/classification",
+      "sourceRoot": "libs/features/classification/src",
+      "prefix": "seedx",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/classification/src/**/*.ts",
+              "libs/features/classification/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/classification"],
+          "options": {
+            "jestConfig": "libs/features/classification/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "green-api": {
+      "projectType": "application",
+      "root": "apps/green/api",
+      "sourceRoot": "apps/green/api",
+      "architect": {
+        "build": {
+          "builder": "@nx-go/nx-go:build",
+          "options": {
+            "outputPath": "dist/apps/green/api",
+            "main": "apps/green/api/main.go"
+          }
+        },
+        "serve": {
+          "builder": "@nx-go/nx-go:serve",
+          "options": {
+            "main": "apps/green/api/main.go"
+          }
+        },
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
+    },
+    "clients-classification": {
+      "projectType": "library",
+      "root": "libs/clients/classification",
+      "sourceRoot": "libs/clients/classification",
+      "architect": {
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
+    },
+    "http-server": {
+      "projectType": "library",
+      "root": "libs/http/server",
+      "sourceRoot": "libs/http/server",
+      "architect": {
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
+    },
+    "http-client": {
+      "projectType": "library",
+      "root": "libs/http/client",
+      "sourceRoot": "libs/http/client",
+      "architect": {
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
+    },
+    "transport-websocket": {
+      "projectType": "library",
+      "root": "libs/transport/websocket",
+      "sourceRoot": "libs/transport/websocket",
+      "architect": {
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
     }
-  }
+  },
+  "defaultProject": "green-client"
 }

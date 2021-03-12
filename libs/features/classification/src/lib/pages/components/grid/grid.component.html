@@ -1,0 +1,36 @@
+<div class="main-panel">
+  <div class="main-panel-left">
+    <div class="grid-container">
+      <seedx-item
+        [ngStyle]="{
+          'grid-row': item.Row,
+          'grid-column': item.Column
+        }"
+        *ngFor="let item of items$ | async"
+        [data]="item"
+      ></seedx-item>
+    </div>
+  </div>
+
+  <div class="main-panel-right">
+    <div class="main-panel-right-hlp">
+      <div class="main-panel-right-hlp status-error"></div>
+      <span class="main-panel-right-hlp-txt">Error</span>
+    </div>
+
+    <div class="main-panel-right-hlp">
+      <div class="main-panel-right-hlp status-unknown"></div>
+      <span class="main-panel-right-hlp-txt">Unknown</span>
+    </div>
+
+    <div class="main-panel-right-hlp">
+      <div class="main-panel-right-hlp status"></div>
+      <span class="main-panel-right-hlp-txt">KWS_KERIDOS</span>
+    </div>
+
+    <div class="main-panel-right-hlp">
+      <div class="main-panel-right-hlp status-yg"></div>
+      <span class="main-panel-right-hlp-txt">KWS_KERIDOS_YG</span>
+    </div>
+  </div>
+</div>

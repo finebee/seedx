@@ -1,3 +1,7 @@
 module.exports = {
-  projects: ['<rootDir>/apps/green'],
+  projects: [
+    '<rootDir>/apps/green/client',
+    '<rootDir>/libs/assets',
+    '<rootDir>/libs/features/classification',
+  ],
 };

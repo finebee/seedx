@@ -18,17 +18,45 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
       }
     }
   },
   "projects": {
-    "green": {
+    "green-client": {
       "tags": []
     },
-    "green-e2e": {
+    "green-client-e2e": {
       "tags": [],
-      "implicitDependencies": ["green"]
+      "implicitDependencies": [
+        "green-client"
+      ]
+    },
+    "green-api": {
+      "tags": []
+    },
+    "clients-classification": {
+      "tags": []
+    },
+    "http-server": {
+      "tags": []
+    },
+    "http-client": {
+      "tags": []
+    },
+    "assets": {
+      "tags": []
+    },
+    "features-classification": {
+      "tags": []
+    },
+    "transport-websocket": {
+      "tags": []
     }
   }
 }

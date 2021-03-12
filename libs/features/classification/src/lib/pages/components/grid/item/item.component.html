@@ -1,0 +1,9 @@
+<div
+  [ngClass]="{
+    'status-error': data.Status == 'ERROR',
+    'status-unknown': data.Status == 'UNKNOWN',
+    'status-kerdos': data.Status === 'KWS_KERIDOS',
+    'status-kerdos-yg': data.Status == 'KWS_KERIDOS_YG'
+  }"
+  class="grid-item-box"
+></div>
