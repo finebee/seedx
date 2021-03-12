@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'green',
-  preset: '../../jest.preset.js',
+  displayName: 'green-client',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -14,7 +14,7 @@ module.exports = {
       },
     },
   },
-  coverageDirectory: '../../coverage/apps/green',
+  coverageDirectory: '../../../coverage/apps/green/client',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
     'jest-preset-angular/build/AngularSnapshotSerializer.js',
