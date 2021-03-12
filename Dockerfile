@@ -17,3 +17,4 @@ COPY ./ops/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=nx-goland-build /app/dist/apps/green/api /app
 COPY --from=nx-angular-build /app/dist/apps/green/client /usr/share/nginx/html
 EXPOSE 80
+CMD service nginx start
