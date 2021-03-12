@@ -1,10 +1,10 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import {createReducer, on, Action} from '@ngrx/store';
+import {EntityState, EntityAdapter, createEntityAdapter} from '@ngrx/entity';
 
 import * as ClassificationActions from './classification.actions';
-import { ClassificationEntity } from './classification.models';
+import {ClassificationEntity} from './classification.models';
 
-export const CLASSIFICATION_FEATURE_KEY = 'classification';
+export const KEY = 'classification';
 
 export interface State extends EntityState<ClassificationEntity> {
   selectedId?: string | number; // which Classification record has been selected
@@ -13,7 +13,7 @@ export interface State extends EntityState<ClassificationEntity> {
 }
 
 export interface ClassificationPartialState {
-  readonly [CLASSIFICATION_FEATURE_KEY]: State;
+  readonly [KEY]: State;
 }
 
 export const classificationAdapter: EntityAdapter<ClassificationEntity> = createEntityAdapter<ClassificationEntity>();
@@ -32,10 +32,10 @@ const classificationReducer = createReducer(
   })),
   on(
     ClassificationActions.loadClassificationSuccess,
-    (state, { classification }) =>
-      classificationAdapter.setAll(classification, { ...state, loaded: true })
+    (state, {classification}) =>
+      classificationAdapter.setAll(classification, {...state, loaded: true})
   ),
-  on(ClassificationActions.loadClassificationFailure, (state, { error }) => ({
+  on(ClassificationActions.loadClassificationFailure, (state, {error}) => ({
     ...state,
     error,
   }))

@@ -1,14 +1,19 @@
-package http_server
+package server
 
 import (
-	"fmt"
-	"net/http"
+  "fmt"
+  "net/http"
 )
 
-func Server(port int) *http.Server {
-	t := ":%d"
+type Endpoint interface {
+  Build() http.Handler
+}
 
-	return &http.Server{
-		Addr: fmt.Sprintf(t, port),
-	}
+func New(port int, e Endpoint) *http.Server {
+  t := ":%d"
+
+  return &http.Server{
+    Handler: e.Build(),
+    Addr:    fmt.Sprintf(t, port),
+  }
 }

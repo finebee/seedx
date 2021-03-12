@@ -1,18 +1,18 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {
-  CLASSIFICATION_FEATURE_KEY,
+  KEY,
   State,
   ClassificationPartialState,
   classificationAdapter,
 } from './classification.reducer';
 
 // Lookup the 'Classification' feature state managed by NgRx
-export const getClassificationState = createFeatureSelector<
-  ClassificationPartialState,
-  State
->(CLASSIFICATION_FEATURE_KEY);
+export const getClassificationState = createFeatureSelector<ClassificationPartialState,
+  State>(KEY);
 
-const { selectAll, selectEntities } = classificationAdapter.getSelectors();
+const {selectAll, selectEntities} = classificationAdapter.getSelectors();
+
+export const getEntities = selectAll;
 
 export const getClassificationLoaded = createSelector(
   getClassificationState,
@@ -44,3 +44,14 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+export const Query = {
+  getEntities,
+  getSelected,
+  getSelectedId,
+  getAllClassification,
+  getClassificationError,
+  getClassificationState,
+  getClassificationLoaded,
+  getClassificationEntities,
+}

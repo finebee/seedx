@@ -2,28 +2,28 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Route } from '@angular/router';
-import { DashboardComponent } from './pages';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromClassification from './+state/products/classification.reducer';
-import { ClassificationEffects } from './+state/products/classification.effects';
+import { StoreModule } from '@ngrx/store';
+import * as fs from './+state';
+import * as fp from './pages';
 
-export const routes: Route[] = [{ path: '', component: DashboardComponent }];
+
 
 @NgModule({
-  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatCardModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StoreModule.forFeature(
-      fromClassification.CLASSIFICATION_FEATURE_KEY,
-      fromClassification.reducer
-    ),
-    EffectsModule.forFeature([ClassificationEffects]),
+    EffectsModule.forFeature([fs.Effects]),
+    StoreModule.forFeature(fs.KEY, fs.reducer),
   ],
+  exports: [fp.components],
+  declarations: [fp.components],
 })
 export class FeaturesClassificationModule {}

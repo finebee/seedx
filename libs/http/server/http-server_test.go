@@ -1,1 +1,1 @@
-package http_server
+package server

@@ -269,6 +269,19 @@
           "builder": "@nx-go/nx-go:lint"
         }
       }
+    },
+    "transport-websocket": {
+      "projectType": "library",
+      "root": "libs/transport/websocket",
+      "sourceRoot": "libs/transport/websocket",
+      "architect": {
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
     }
   },
   "defaultProject": "green-client"
