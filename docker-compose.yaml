@@ -3,8 +3,9 @@ version: "3.2"
 services:
   app-01:
     build: .
+    command: nginx -t
     command: /app/api
-    container_name: app-01
+    command: service nginx restart
     ports:
       - 5000:80
     networks:
@@ -12,8 +13,9 @@ services:
 
   app-02:
     build: .
+    command: nginx -t
     command: /app/api
-    container_name: app-02
+    command: service nginx restart
     ports:
       - 5001:80
     networks:
