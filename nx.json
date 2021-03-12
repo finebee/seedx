@@ -25,6 +25,7 @@
     "clients-classification": { "tags": [] },
     "http-server": { "tags": [] },
     "http-client": { "tags": [] },
-    "assets": { "tags": [] }
+    "assets": { "tags": [] },
+    "features-classification": { "tags": [] }
   }
 }
