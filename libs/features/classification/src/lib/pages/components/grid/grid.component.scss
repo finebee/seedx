@@ -1,0 +1,84 @@
+.grid-container {
+  // margin: 2rem;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(9, 0fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0px 0px;
+}
+
+/* For presentation only, no need to copy the code below */
+.grid-container * {
+  border: 1px solid red;
+  position: relative;
+}
+
+.grid-container *:after {
+  content: attr(class);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.main-panel {
+  width: 100vw;
+  display: flex;
+  // justify-content: start;
+
+  &-left {
+    // width: 60%;
+    max-width: 60%;
+    margin-right: 10px;
+    // background-color: rgb(243, 238, 238);
+  }
+
+  &-right {
+    // width: 40%;
+    // height: 100%;
+    max-width: 40%;
+    // padding-left: 20px;
+    // padding-right: 20px;
+    padding: 20px;
+    // background-color: rgb(243, 238, 238);
+    // background-color: rgb(199, 197, 197);
+
+    &-hlp {
+      display: flex;
+      padding-top: 10px;
+      // padding-left: 20px;
+
+      &-txt {
+        font-size: 35px;
+        padding-left: 25px;
+      }
+    }
+  }
+}
+
+.status {
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: cornflowerblue;
+
+  &-yg {
+    width: 45px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: coral !important;
+  }
+
+  &-error {
+    width: 45px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: grey !important;
+  }
+
+  &-unknown {
+    width: 45px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: cyan !important;
+  }
+}

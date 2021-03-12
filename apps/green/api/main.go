@@ -1,12 +1,15 @@
 package main
 
-import "fmt"
+import (
+  "log"
 
-func Hello(name string) string {
-	result := "Hello " + name
-	return result
-}
+  "github.com/finebee/seedx/apps/green/api/endpoints"
+  "github.com/finebee/seedx/libs/http/server"
+)
 
 func main() {
-	fmt.Println(Hello("green-api"))
+  classificationApi := endpoints.
+    Classification("/api/classification")
+
+  log.Fatal(server.New(5000, classificationApi).ListenAndServe())
 }

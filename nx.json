@@ -48,6 +48,15 @@
     },
     "http-client": {
       "tags": []
+    },
+    "assets": {
+      "tags": []
+    },
+    "features-classification": {
+      "tags": []
+    },
+    "transport-websocket": {
+      "tags": []
     }
   }
 }

@@ -49,18 +49,26 @@
             "tsConfig": "apps/green/client/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/green/client/src/favicon.ico",
-              "apps/green/client/src/assets"
+              {
+                "input": "libs/assets/src",
+                "glob": "favicon.ico",
+                "output": "./"
+              },
+              {
+                "input": "libs/assets/src/assets",
+                "glob": "**/*",
+                "output": "assets"
+              }
             ],
-            "styles": ["apps/green/client/src/styles.scss"],
+            "styles": ["libs/assets/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/green/client/src/environments/environment.ts",
-                  "with": "apps/green/client/src/environments/environment.prod.ts"
+                  "replace": "libs/assets/src/environments/environment.ts",
+                  "with": "libs/assets/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -147,6 +155,56 @@
         }
       }
     },
+    "assets": {
+      "projectType": "library",
+      "root": "libs/assets",
+      "sourceRoot": "libs/assets/src",
+      "prefix": "seedx",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/assets/src/**/*.ts",
+              "libs/assets/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/assets"],
+          "options": {
+            "jestConfig": "libs/assets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "features-classification": {
+      "projectType": "library",
+      "root": "libs/features/classification",
+      "sourceRoot": "libs/features/classification/src",
+      "prefix": "seedx",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/features/classification/src/**/*.ts",
+              "libs/features/classification/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/features/classification"],
+          "options": {
+            "jestConfig": "libs/features/classification/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "green-api": {
       "projectType": "application",
       "root": "apps/green/api",
@@ -203,6 +261,19 @@
       "projectType": "library",
       "root": "libs/http/client",
       "sourceRoot": "libs/http/client",
+      "architect": {
+        "test": {
+          "builder": "@nx-go/nx-go:test"
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
+    },
+    "transport-websocket": {
+      "projectType": "library",
+      "root": "libs/transport/websocket",
+      "sourceRoot": "libs/transport/websocket",
       "architect": {
         "test": {
           "builder": "@nx-go/nx-go:test"
