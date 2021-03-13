@@ -1,21 +1,12 @@
 version: "3.2"
 
 services:
-  app-01:
+  seedx-geen-ui:
     build: .
-    command: /app/api
-    container_name: app-01
+    tty: true
+    command: bash -c "nginx -t && service nginx start && /app/api"
     ports:
-      - 5000:80
-    networks:
-      - seedx
-
-  app-02:
-    build: .
-    command: /app/api
-    container_name: app-02
-    ports:
-      - 5001:80
+      - "80:80"
     networks:
       - seedx
 

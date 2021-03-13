@@ -10,7 +10,7 @@ export class ClassificationService {
   private state$: WebSocketSubject<ClassificationEntity[]>;
 
   state(): Observable<ClassificationEntity[]> {
-    this.state$ = webSocket(`ws://localhost:5000/api/classification/ws`);
+    this.state$ = webSocket(`ws://localhost:80/api/classification/ws`);
     return this.state$;
   }
 }

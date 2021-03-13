@@ -9,7 +9,7 @@ WORKDIR /app
 COPY go.* ./
 RUN go mod download
 COPY . ./
-RUN go build -v -o dist/apps/green/api apps/green/api/main.go
+RUN go build -o dist/apps/green/api apps/green/api/main.go
 
 FROM nginx
 WORKDIR /app
